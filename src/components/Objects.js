@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
 import {FontLoader} from "three/examples/jsm/loaders/FontLoader";
 import helvetiker_regular_font from '../fonts/helvetiker_regular.json'
+// import here
 
 // Function to create a box
 export function createBox(width, height, depth, color = 0xadd8e6) {
