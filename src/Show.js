@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import {createBox, createPlane} from "./components/Objects";
+import {createText} from "./components/Objects";
 import {createPerspectiveCamera} from "./components/Cameras";
 import {createWebGLRender} from "./components/WebGLRender";
 
@@ -31,7 +31,7 @@ const Show = () => {
         scene.add(directionalLight);
 
         // Box (Cube)
-        const box = createBox(3,3,3,0xadd8e6);
+        const box = createText("Iresh");
         scene.add(box);
 
         // const light = new THREE.PointLight(0xffffff, .5, 5); // White light with intensity 1 and range of 5 units
@@ -55,8 +55,6 @@ const Show = () => {
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.update();
 
-        // new comment
-        // new comment
         // new comment
 
         // Animation loop
