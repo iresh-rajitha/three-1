@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {createBox, createPlane} from "./components/Objects";
+import {createPerspectiveCamera} from "./components/Cameras";
+import {createWebGLRender} from "./components/WebGLRender";
 
 const Show = () => {
     const canvasRef = useRef(null);
@@ -9,18 +11,13 @@ const Show = () => {
     useEffect(() => {
         // Scene
         const scene = new THREE.Scene();
-
+        // scene.background = new THREE.Color(0xdddddd)
         // Camera
-        const camera = new THREE.PerspectiveCamera(
-            75, // Field of view
-            window.innerWidth / window.innerHeight, // Aspect ratio
-            0.1, // Near clipping plane
-            1000 // Far clipping plane
-        );
-        camera.position.set(0, 0, 5); // Set the initial camera position (z-axis)
+        const camera = createPerspectiveCamera()
+        camera.position.set(0, 2, 8); // Set the initial camera position (z-axis)
 
         // Renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = createWebGLRender();
         renderer.setSize(window.innerWidth, window.innerHeight);
         canvasRef.current.appendChild(renderer.domElement); // Append the canvas to the div element
 
@@ -31,18 +28,24 @@ const Show = () => {
         // Light - Directional Light
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Increase the intensity of the directional light
         directionalLight.position.set(5, 5, 5);
-        // scene.add(directionalLight);
+        scene.add(directionalLight);
 
         // Box (Cube)
         const box = createBox(3,3,3,0xadd8e6);
         scene.add(box);
 
-        const light = new THREE.PointLight(0xffffff, .5, 5); // White light with intensity 1 and range of 5 units
-        box.add(light);
+        // const light = new THREE.PointLight(0xffffff, .5, 5); // White light with intensity 1 and range of 5 units
+        // box.add(light);
 
+        // ground Plane
+        // const plane = createPlane(40,40 , 0xffffff , true)
+        // scene.add(plane);
+        // plane.rotateX(Math.PI/2);
+        // plane.position.y = -10;
 
-        const plane = createPlane(40,40)
-        scene.add(plane);
+        // Grid Helper
+        const  grid = new THREE.GridHelper(20,20);
+        scene.add(grid);
 
         // Axes Helpers
         const axesHelper = new THREE.AxesHelper(5);

@@ -32,14 +32,12 @@ export function createRectAreaLight(color = 0xffffff, intensity = 1, width = 10,
 
 // Function to create a point light helper
 export function createPointLightHelper(light, size = 1) {
-    const pointLightHelper = new THREE.PointLightHelper(light, size);
-    return pointLightHelper;
+    return new THREE.PointLightHelper(light, size);
 }
 
 // Function to create a spot light helper
 export function createSpotLightHelper(light) {
-    const spotLightHelper = new THREE.SpotLightHelper(light);
-    return spotLightHelper;
+    return new THREE.SpotLightHelper(light);
 }
 
 
