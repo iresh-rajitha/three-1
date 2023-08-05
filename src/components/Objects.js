@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
+import {FontLoader} from "three/examples/jsm/loaders/FontLoader";
+import helvetiker_regular_font from '../fonts/helvetiker_regular.json'
 
 // Function to create a box
 export function createBox(width, height, depth, color = 0xadd8e6) {
@@ -85,17 +88,17 @@ export function createCircle(radius, segments = 32, color = 0x00ffff) {
 }
 
 // Function to create a text
-// export function createText(text, size = 1, height = 0.2, color = 0xffffff) {
-//     const textGeometry = new TextGeometry(text, {
-//         font: new THREE.Font(THREE.FontUtils.generateShapes(THREE.FontUtils.loadFace("helvetiker"))),
-//         size: size,
-//         height: height,
-//     });
-//     const textMaterial = new THREE.MeshPhongMaterial({ color: color });
-//     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-//     return textMesh;
-// }
-// }
+export function createText(text, size = 1, height = 0.2, color = 0xffffff) {
+    const fontLoader = new FontLoader();
+    const font = fontLoader.parse(helvetiker_regular_font); // Replace yourFontData with the actual font data (JSON object or font file).
+    const textGeometry = new TextGeometry(text, {
+        font: font,
+        size: size,
+        height: height,
+    });
+    const textMaterial = new THREE.MeshPhongMaterial({ color: color });
+    return new THREE.Mesh(textGeometry, textMaterial);
+}
 
 // Function to create a lathe
 export function createLathe(points, segments = 12, color = 0x4169e1) {
